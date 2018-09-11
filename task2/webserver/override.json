@@ -1,0 +1,55 @@
+{
+    "spec": {
+        "template" : {
+            "spec": {
+                "containers": [
+                    {
+                        "name": "webserver",
+                        "image": "webserver:v1",
+                        "ports": [
+                            {
+                                "containerPort": 80,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                            {
+                                "name": "WS_DIR",
+                                "value": "/data"
+                            },
+                            {
+                                "name": "WS_PORT",
+                                "value": "80"
+                            },
+                            {
+                                "name": "RMQ_HOST",
+                                "value": "message-broker"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "500m"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/data",
+                                "name": "data-storage"
+                            }
+                        ],
+                        "imagePullPolicy": "Never"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data-storage",
+                        "persistentVolumeClaim":
+                            {
+                                "claimName": "data-volume-claim"
+                            }
+                    }
+                ]
+            }
+        }
+    }
+}
