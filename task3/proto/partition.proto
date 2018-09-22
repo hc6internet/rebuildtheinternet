@@ -1,0 +1,13 @@
+syntax = "proto3";
+package main;
+
+message PartitionRequest {
+    string siteId = 1;
+    uint32 seq = 2;
+}
+
+message PartitionResponse {
+    string partitionId = 1;
+    uint32 seq = 2;
+    bool status = 3;
+}
